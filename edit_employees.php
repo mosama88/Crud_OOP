@@ -1,43 +1,10 @@
 <?php include 'include/header.php' ?>
 
-<h1 class="text-center my-4">Create Emplyees!</h1>
-
-<?php
+<h1 class="text-center my-4">Edit Emplyees!</h1>
 
 
-$error = '';
-if(isset($_POST['submit'])){
-
-
-    $name= trim(htmlentities(htmlspecialchars($_POST['name']))) ;
-    $department= trim(htmlentities(htmlspecialchars($_POST['department']))) ;
-    $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
-    $password= trim(htmlentities(htmlspecialchars($_POST['password']))) ;
-
-
-    // var_dump( $name .  $department . $email . $password);
-
-    if(empty($name) || empty($department)|| empty($email)|| empty($password)){
-        $error = "Please Fill data";
-    }else{
-
-        if(FILTER_VALIDATE_EMAIL($email)){
-            $error = "Please Write Valid Email";
-        }
-
-    }
-}
-
-
-?>
-<form action="<?= $_SERVER['PHP_SELF']?>" method="POST">
-
+<form action="" method="POST">
     <div class="row col-8 mx-auto card p-4">
-        <?php if ($error != ''):?>
-        <div class="alert alert-danger" role="alert">
-            <?php echo $error?>
-        </div>
-        <?php endif?>
         <div class="form-group mb-3">
             <label for="exampleFormControlName" class="form-label">Name</label>
             <input type="text" class="form-control" name="name" id="exampleFormControlName" placeholder="name">
@@ -67,7 +34,7 @@ if(isset($_POST['submit'])){
                 placeholder="name@example.com">
         </div>
         <div class="form-group mb-3 text-center">
-            <button type="submit" name="submit" class="btn btn-primary mb-3">Submit</button>
+            <button type="submit" class="btn btn-primary mb-3">Submit</button>
         </div>
     </div>
 </form>
