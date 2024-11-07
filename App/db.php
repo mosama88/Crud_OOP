@@ -1,6 +1,24 @@
 <?php
 
 
+namespace App;
 Class Database{
     
+
+
+    private $serverName =  "localhost";
+    private $username =  "root";
+    private $password =  "";
+    private $dbName =  "crud_php_oop";
+    private $conn;
+
+
+    public function __construct(){
+        $this->conn = mysqli_connect($this->serverName,$this->username,$this->password,$this->dbName);
+
+        if(!$this->conn){
+            die ("Server not connected" . mysqli_connect_error());
+        }else{
+        }
+    }
 }

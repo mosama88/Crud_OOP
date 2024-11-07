@@ -1,53 +1,41 @@
-<?php include 'include/header.php' ?>
+<?php 
+include 'include/header.php';
+include 'App/config.php';
+use App\Database;
+ ?>
+
+
 
 <h1 class="text-center my-4">Create Emplyees!</h1>
 
-<?php
-
-$departments = ['IT','HR','Accountant','Sales'];
-$error = '';
-if(isset($_POST['submit'])){
-
-
-    $name= trim(htmlentities(htmlspecialchars($_POST['name']))) ;
-    $department= trim(htmlentities(htmlspecialchars($_POST['department']))) ;
-    $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
-    $password= trim(htmlentities(htmlspecialchars($_POST['password']))) ;
-
-
-    // var_dump( $name .  $department . $email . $password);
-
-    if(empty($name) || empty($department)|| empty($email)|| empty($password)){
-        $error = "Please Fill data";
-    }else{
-
-        if(filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
-
-            $department = strtolower($department);
-            if(in_array($department,$departments)){
-            }else{
-                $error = 'Department Not Found';
-
-            }
-
-        }else{
-            $error = "Please Write Valid Email";
-
-        }
-
-    }
-}
-
-
-?>
-<form action="<?= $_SERVER['PHP_SELF']?>" method="POST">
+<form action="<?= URL . 'handlers/employees'?>/create_employees.php" method="POST">
 
     <div class="row col-8 mx-auto card p-4">
-        <?php if ($error != ''):?>
+
+
+        <?php  if(isset($_SESSION['error'])):?>
+        <?php foreach($_SESSION['error'] as $errors):?>
         <div class="alert alert-danger" role="alert">
-            <?php echo $error?>
+            <?= $errors?>
         </div>
-        <?php endif?>
+        <?php
+    endforeach;
+    unset($_SESSION['error']);
+        ?>
+        <?php endif;
+        ?>
+
+        <?php  if(isset($_SESSION['success'])):?>
+        <div class="alert alert-success" role="alert">
+            <?= $_SESSION['success']?>
+        </div>
+        <?php 
+        unset($_SESSION['success'])
+        ?>
+        <?php endif;?>
+
+
+
         <div class="form-group mb-3">
             <label for="exampleFormControlName" class="form-label">Name</label>
             <input type="text" class="form-control" name="name" id="exampleFormControlName" placeholder="name">
