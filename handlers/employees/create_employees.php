@@ -1,6 +1,9 @@
 <?php
 
 include "../../App/config.php";
+include "../../App/db.php";
+// use App\db;
+
 
 $errors=[];
 $success = "";
@@ -28,16 +31,21 @@ if(empty($password)){
 if(empty($department)){
     $errors []= "department Is Empty please write in input" ;
 }elseif(!in_array($department,$departments)){
+    $department = strtolower($department);
     $errors[] = "Department Not Exists";
 }
 
 $_SESSION['error'] = $errors;
 if(empty($errors)){
-    $_SESSION['success'] = "Data Inserted successfully";
-    header ("location: ../../add_employees.php");
+
+    $db = new Database();
+    $newPassword = $db->enc_password($password);
+    $sql = "INSERT INTO `employees`(`name`,`email`,`password`,`department`)VALUES('$name','$email','$newPassword','$department')";
+    $_SESSION['success'] = $db->insert($sql);
+    redirect("../../add_employees.php");
     die();
 }else{
-    header ("location: ../../add_employees.php");
+    redirect("../../add_employees.php");
     die();
 }
 

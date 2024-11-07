@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App;
+// namespace App;
 Class Database{
     
 
@@ -18,7 +18,19 @@ Class Database{
 
         if(!$this->conn){
             die ("Server not connected" . mysqli_connect_error());
-        }else{
         }
+    }
+
+    public function insert($sql){
+        if (mysqli_query($this->conn, $sql)) {  // تمرير $sql كمعامل ثاني
+            return "Employee Added Success"; 
+        }else{
+            die("Error : " .  mysqli_error($this->conn));
+        }
+    }
+
+
+    public function enc_password($password){
+        return md5($password);
     }
 }
