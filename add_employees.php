@@ -4,7 +4,7 @@
 
 <?php
 
-
+$departments = ['IT','HR','Accountant','Sales'];
 $error = '';
 if(isset($_POST['submit'])){
 
@@ -21,8 +21,18 @@ if(isset($_POST['submit'])){
         $error = "Please Fill data";
     }else{
 
-        if(FILTER_VALIDATE_EMAIL($email)){
+        if(filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
+
+            $department = strtolower($department);
+            if(in_array($department,$departments)){
+            }else{
+                $error = 'Department Not Found';
+
+            }
+
+        }else{
             $error = "Please Write Valid Email";
+
         }
 
     }
@@ -52,7 +62,7 @@ if(isset($_POST['submit'])){
 
         <div class="form-group mb-3">
             <label for="exampleFormControlInput1" class="form-label">Email address</label>
-            <input type="email" class="form-control" name="email" id="exampleFormControlInput1"
+            <input type="text" class="form-control" name="email" id="exampleFormControlInput1"
                 placeholder="name@example.com">
         </div>
 
