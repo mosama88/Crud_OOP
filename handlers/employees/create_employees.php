@@ -1,8 +1,7 @@
 <?php
 
 include "../../App/config.php";
-include "../../App/db.php";
-// use App\db;
+ use App\Database;
 
 
 $errors=[];
@@ -16,6 +15,7 @@ $name = trim(htmlentities(htmlspecialchars($_POST['name'])));
 $email = trim(htmlentities(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL)));
 $password = trim(htmlentities(htmlspecialchars($_POST['password'])));
 $department = trim(htmlentities(htmlspecialchars($_POST['department'])));
+$mobile = trim(htmlentities(htmlspecialchars($_POST['mobile'])));
 
 
 
@@ -27,6 +27,9 @@ if(empty($email)){
 }
 if(empty($password)){
     $errors []= "password Is Empty please write in input" ;
+}
+if(empty($mobile)){
+    $errors []= "mobile Is Empty please write in input" ;
 }
 if(empty($department)){
     $errors []= "department Is Empty please write in input" ;
@@ -40,7 +43,7 @@ if(empty($errors)){
 
     $db = new Database();
     $newPassword = $db->enc_password($password);
-    $sql = "INSERT INTO `employees`(`name`,`email`,`password`,`department`)VALUES('$name','$email','$newPassword','$department')";
+    $sql = "INSERT INTO `employees`(`name`,`email`,`password`,`department`,`mobile`)VALUES('$name','$email','$newPassword','$department','$mobile')";
     $_SESSION['success'] = $db->insert($sql);
     redirect("../../add_employees.php");
     die();

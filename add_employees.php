@@ -60,9 +60,9 @@ use App\Database;
                 placeholder="*******">
         </div>
         <div class="form-group mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-            <input type="email" class="form-control" name="email" id="exampleFormControlInput1"
-                placeholder="name@example.com">
+            <label for="exampleFormControlInput1" class="form-label">Mobile</label>
+            <input type="text" class="form-control" name="mobile" id="exampleFormControlInput1"
+                placeholder="01152005100">
         </div>
         <div class="form-group mb-3 text-center">
             <button type="submit" name="submit" class="btn btn-primary mb-3">Submit</button>

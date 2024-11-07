@@ -11,3 +11,4 @@ define("URL", "http://localhost/Crud_OOP/");
 
 
 include ('functions.php');
+include "db.php";
